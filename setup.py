@@ -8,6 +8,6 @@ setup(
     author='Kunle Giwa',
     author_email='olakunlegiwa@gmail.com',
     license='unlicense',
-    packages=setuptools.find_packages(),
+    packages=find_packages(),
     
 )
