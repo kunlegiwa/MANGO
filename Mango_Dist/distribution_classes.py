@@ -29,8 +29,8 @@ class Distribution(object):
                 )(self.size, self.distribution_params).tolist()
             return self.drawn
         else:
-            self.drawn = ut.distributions_and_parameters['distributions'].get(self.distribution, lambda d: print('Invalid distribution')
-                )(self.size, self.distribution_params)
+            self.drawn = [ut.distributions_and_parameters['distributions'].get(self.distribution, lambda d: print('Invalid distribution')
+                )(self.size, self.distribution_params)]
             return self.drawn
 
     
