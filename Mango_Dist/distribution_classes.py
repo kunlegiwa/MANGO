@@ -36,7 +36,7 @@ class Distribution(object):
     
     def summarise(self):
         if self.drawn:
-            df = pd.DataFrame(self.drawn, columns =['Draw'])
+            df = pd.DataFrame(self.drawn, columns =['Draw Summary'])
             return df.describe()
         return 'No draw'
 
