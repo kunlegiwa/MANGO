@@ -1,4 +1,4 @@
-from Mango_Dist.utils import utils
+import utils as ut
 import pandas as pd
 
 
@@ -12,7 +12,7 @@ class Distribution(object):
         """
         # define default attributes
         self.default_attr = dict(distribution='exponential', scale=5, size=None)
-        self.distribution_params = set(utils.allowed_distribution_params)
+        self.distribution_params = set(ut.allowed_distribution_params)
         self.allowed_attr = set(list(self.default_attr.keys()))
         self.default_attr.update(dist_args)
         self.__dict__.update((k, v) for k, v in self.default_attr.items()
@@ -24,11 +24,11 @@ class Distribution(object):
     def draw(self):
         '''Draw from distribution without unpacking parameters'''
         if self.size and self.size > 1:
-            self.drawn = utils.distributions_and_parameters['distributions'].get(self.distribution, lambda d: print('Invalid distribution')
+            self.drawn = ut.distributions_and_parameters['distributions'].get(self.distribution, lambda d: print('Invalid distribution')
                 )(self.size, self.distribution_params).tolist()
             return self.drawn
         else:
-            self.drawn = utils.distributions_and_parameters['distributions'].get(self.distribution, lambda d: print('Invalid distribution')
+            self.drawn = ut.distributions_and_parameters['distributions'].get(self.distribution, lambda d: print('Invalid distribution')
                 )(self.size, self.distribution_params)
             return self.drawn
 
