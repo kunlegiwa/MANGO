@@ -1,4 +1,4 @@
-import distribution_functions as df
+from Mango_Dist import distribution_functions as df
 import pandas as pd
 
 
