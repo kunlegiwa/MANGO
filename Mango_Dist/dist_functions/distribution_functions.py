@@ -1,5 +1,4 @@
-import utils
-
+from Mango_Dist.utils import utils
 
 #MANGO TEST DISTRIBUTION FUNCTION
 
