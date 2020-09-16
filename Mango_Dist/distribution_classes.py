@@ -1,36 +1,41 @@
-from numpy import random
-from collections import defaultdict
+import distribution_functions as df
+import pandas as pd
+
 
 
 class Distribution(object):
-    '''A distribution class from which other distribution classes will inherit'''
+    '''A distribution class'''
+
+    def __init__(self, **dist_args):
+        """
+        Initialise distribution.
+        """
+        # define default attributes
+        self.default_attr = dict(distribution='exponential', scale=5, size=None)
+        self.distribution_params = set(df.allowed_distribution_params)
+        self.allowed_attr = set(list(self.default_attr.keys()))
+        self.default_attr.update(dist_args)
+        self.__dict__.update((k, v) for k, v in self.default_attr.items()
+                             if k in (self.allowed_attr | self.distribution_params))
+        self.distribution_params = {k: self.__dict__.get(k, False) for k in self.distribution_params}
+        self.drawn = False
+
+
+    def draw(self):
+        '''Sample distribution'''
+        if self.size and self.size > 1:
+            self.drawn = df._sample(self.distribution, self.size, self.distribution_params).tolist()
+            return self.drawn
+        else:
+            self.drawn = [df._sample(self.distribution, self.size, self.distribution_params)]
+            return self.drawn
+    
+    def summarise(self):
+        if self.drawn:
+            df = pd.DataFrame(self.drawn, columns =['Draw'])
+            return df.describe()
+        return 'No draw'
 
     def __repr__(self):
         return 'Distribution'
-
-    def sample(self, t=None, ind=None):
-        pass
-
-    def _sample(self, t=None, ind=None):
-        """
-        Performs vaildity checks before sampling.
-        """
-        s = self.sample(t=t, ind=ind)
-        if (isinstance(s, float) or isinstance(s, int)) and s >= 0:
-            return s
-        else:
-            raise ValueError('Invalid time sampled.')
-
-    
-
-def sample(dist, size, **dist_params):
-    '''Sample distribution'''
-    distributions_and_parameters = defaultdict(dict)
-    allowed_distribution_params = ['a', 'b', 'n', 'p', 'df', 'alpha', 'scale', 'dfnum', 'dfden', 'shape', 'p', 'df', 'alpha', 'scale']
-    distributions_and_parameters['parameters'].update((k, v) for k, v in dist_params.items() if k in allowed_distribution_params)
-
-    try:
-        return getattr(random, dist)(size=5, scale=3)
-    except ValueError as e:
-        exit(e)
 
