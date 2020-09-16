@@ -1,5 +1,5 @@
-from Mango_Dist import distribution_functions as df
-from  Mango_Dist.distribution_classes import Distribution
+import distribution_functions as df
+from  distribution_classes import Distribution
 
 
 print(df.draw('lognormal', size=5, mean=4, sigma=2))

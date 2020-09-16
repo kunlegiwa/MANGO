@@ -1,4 +1,4 @@
-from Mango_Dist import distribution_functions as df
+import distribution_functions as df
 import pandas as pd
 
 
@@ -24,10 +24,10 @@ class Distribution(object):
     def draw(self):
         '''Sample distribution'''
         if self.size and self.size > 1:
-            self.drawn = df._sample(self.distribution, self.size, self.distribution_params).tolist()
+            self.drawn = df._draw(self.distribution, self.size, self.distribution_params).tolist()
             return self.drawn
         else:
-            self.drawn = [df._sample(self.distribution, self.size, self.distribution_params)]
+            self.drawn = [df._draw(self.distribution, self.size, self.distribution_params)]
             return self.drawn
     
     def summarise(self):
