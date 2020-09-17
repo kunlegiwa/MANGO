@@ -24,7 +24,7 @@ class Distribution(object):
 
     def draw(self):
         '''Draw from distribution without unpacking parameters'''
-        if self.size and self.size > 1:
+        if self.size:
             self.drawn = ut.distributions_and_parameters['distributions'].get(self.distribution, lambda d: print('Invalid distribution')
                 )(self.size, self.distribution_params).tolist()
             return self.drawn
