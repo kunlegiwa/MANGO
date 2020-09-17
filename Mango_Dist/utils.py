@@ -261,6 +261,3 @@ def zipf(size, params):
         return random.zipf(params['a'], size)
     except ValueError as e:
         exit(e)
-
-
-print(random.exponential(scale=10))
